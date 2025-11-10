@@ -1,19 +1,19 @@
 {
-  "version": 2,                    // Vercel config version
+  "version": 2,
   "builds": [
     {
-      "src": "claude.js",           // Tell Vercel: "this is a Node.js file"
-      "use": "@vercel/node"         // Use Node.js runtime to run it
+      "src": "api/claude.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/chat",           // When someone visits /api/chat
-      "dest": "/claude.js"          // Send them to claude.js
+      "src": "/api/chat",
+      "dest": "/api/claude.js"
     },
     {
-      "src": "/(.*)",               // Everything else (like .html, .css)
-      "dest": "/public/$1"          // Serve from public folder
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
