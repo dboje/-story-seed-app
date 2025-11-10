@@ -1,30 +1,19 @@
 {
-  "version": 2,
+  "version": 2,                    // Vercel config version
   "builds": [
     {
-      "src": "claude.js",
-      "use": "@vercel/node"
+      "src": "claude.js",           // Tell Vercel: "this is a Node.js file"
+      "use": "@vercel/node"         // Use Node.js runtime to run it
     }
   ],
   "routes": [
     {
-      "src": "/api/chat",
-      "dest": "/claude.js"
+      "src": "/api/chat",           // When someone visits /api/chat
+      "dest": "/claude.js"          // Send them to claude.js
     },
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "src": "/(.*)",               // Everything else (like .html, .css)
+      "dest": "/public/$1"          // Serve from public folder
     }
   ]
 }
-```
-
-## 📁 **File Structure Should Be:**
-```
-your-project/
-├── claude.js          (at root level)
-├── public/
-│   └── story-seed-landing.html
-├── package.json
-├── vercel.json
-└── README.md
