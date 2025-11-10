@@ -2,24 +2,24 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
+  
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
   }
-
+  
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
-
+  
   try {
     const { systemPrompt, userMessage, conversationHistory } = req.body;
-
+    
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': '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',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,  // ← Use environment variable
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
@@ -31,10 +31,9 @@ export default async function handler(req, res) {
         ])
       })
     });
-
+    
     const data = await response.json();
     res.status(200).json(data);
-
   } catch (error) {
     console.error('API Error:', error);
     res.status(500).json({ error: 'Failed to call Claude API' });
