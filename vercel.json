@@ -1,13 +1,30 @@
 {
-  "functions": {
-    "api/claude.js": {
-      "maxDuration": 30
-    }
-  },
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/api/claude",
-      "destination": "/api/claude.js"
+      "src": "claude.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/chat",
+      "dest": "/claude.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
+```
+
+## 📁 **File Structure Should Be:**
+```
+your-project/
+├── claude.js          (at root level)
+├── public/
+│   └── story-seed-landing.html
+├── package.json
+├── vercel.json
+└── README.md
